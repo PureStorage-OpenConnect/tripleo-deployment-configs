@@ -1,0 +1,61 @@
+heat_template_version: 2015-10-15
+
+description: Configure hieradata for Cinder Pure configuration
+
+parameters:
+  server:
+    description: ID of the controller node to apply this config to
+    type: string
+
+  # Config specific parameters, to be provided via parameter_defaults
+  CinderEnablePureBackend:
+    type: boolean
+    default: true
+  CinderPureBackendName:
+    type: string
+    default: 'tripleo_pure'
+  CinderPureSanIp:
+    type: string
+  CinderPureAPIToken:
+    type: string
+  CinderPureUseChap:
+    type: boolean
+    default: false
+  CinderPureMultipathXfer:
+    type: boolean
+    default: false
+
+resources:
+  CinderPureConfig:
+    type: OS::Heat::StructuredConfig
+    properties:
+      group: os-apply-config
+      config:
+        hiera:
+          datafiles:
+            cinder_pure_data:
+              mapped_data:
+                cinder_enable_pure_backend: {get_input: EnablePureBackend}
+                cinder::backend::pure::volume_backend_name: {get_input: PureBackendName}
+                cinder::backend::pure::san_ip: {get_input: PureSanIp}
+                cinder::backend::pure::pure_api_token: {get_input: PureAPIToken}
+                cinder::backend::pure::use_chap_auth: {get_input: PureUseChap}
+                cinder::backend::pure::use_multipath_for_image_xfer: {get_input: PureMultipathXfer}
+
+  CinderPureDeployment:
+    type: OS::Heat::StructuredDeployment
+    properties:
+      name: CinderPureDeployment
+      config: {get_resource: CinderPureConfig}
+      server: {get_param: server}
+      input_values:
+        EnablePureBackend: {get_param: CinderEnablePureBackend}
+        PureBackendName: {get_param: CinderPureBackendName}
+        PureSanIp: {get_param: CinderPureSanIp}
+        PureUseChap: {get_param: CinderPureUseChap}
+        PureMultipathXfer: {get_param: CinderPureMultipathXfer}
+
+outputs:
+  deploy_stdout:
+    description: Deployment reference, used to trigger puppet apply on changes
+    value: {get_attr: [CinderPureDeployment, deploy_stdout]}
