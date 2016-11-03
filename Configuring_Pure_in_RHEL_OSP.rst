@@ -49,12 +49,12 @@ https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs.
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
 
-''pure-temp.yaml'' and *cinder-pure-config.yaml* into *~stack/templates/*
+``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
-*cinder-pure.yaml* into */usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre\_deploy/controller/*
+``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre\_deploy/controller/``
 
 After you have copied these files you need to edit the
-*~/templates/cinder-pure-config.yaml* to populate it with your specific
+``~/templates/cinder-pure-config.yaml`` to populate it with your specific
 FlashArray data.
 
 In the parameter\_defaults section of this file add the management
@@ -71,7 +71,7 @@ Deploying the Configured Backend
 
 To deploy the single backend configured above, first, log in as the
 stack user to the Undercloud. Then deploy the backend (defined in the
-edited *~/templates/cinder-pure-config.yaml*) by running the following::
+edited ``~/templates/cinder-pure-config.yaml``) by running the following::
 
   $ openstack overcloud deploy –templates –e ~/templates/cinder-pure-config.yaml
 
@@ -84,7 +84,7 @@ Test the Configured Backend
 
 After deploying the backend, test whether you can successfully create
 volumes on it. Doing so will require loading the necessary environment
-variables first. These variables are defined in */home/stack/overcloudrc*
+variables first. These variables are defined in ``/home/stack/overcloudrc``
 by default.
 
 To load these variables, run the following command as the stack user::
