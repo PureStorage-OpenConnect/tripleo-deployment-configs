@@ -8,14 +8,39 @@ parameters:
     type: string
 
 resources:
-    PureSetup: # 1
+    PureSetup:
     type: OS::Heat::SoftwareConfig
     properties:
       group: script
-      config: |  # 2
+      config: | #
         #!/bin/bash
         sudo easy_install purestorage
-        # 3
+
+cat <<EOF >>/tmp/multipath.conf
+defaults {
+         polling_interval       5
+}
+
+blacklist {
+    devnode "vda"
+}
+
+devices {
+        device {
+               vendor                   "PURE"
+               path_selector            "queue-length 0"
+               path_grouping_policy     multibus
+               path_checker             tur
+               fast_io_fail_tmo         10
+               dev_loss_tmo             60
+               user_friendly_names      no
+               no_path_retry            0
+               features                 0
+               }
+}
+EOF
+       sudo cp /tmp/multipath.conf /etc/multipath.conf
+       # 
 
     ExtraPreDeployment:
     type: OS::Heat::SoftwareDeployment
