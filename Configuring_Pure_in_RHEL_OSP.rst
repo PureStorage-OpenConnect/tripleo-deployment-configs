@@ -71,9 +71,9 @@ Deploying the Configured Backend
 
 To deploy the single backend configured above, first, log in as the
 stack user to the Undercloud. Then deploy the backend (defined in the
-edited ~/templates/cinder-pure-config.yaml) by running the following:
+edited ~/templates/cinder-pure-config.yaml) by running the following:::
 
-$ openstack overcloud deploy –templates –e ~/templates/cinder-pure-config.yaml
+  $ openstack overcloud deploy –templates –e ~/templates/cinder-pure-config.yaml
 
 If you passed any extra environment files when you created the Overcloud
 you must pass them again here using the –e option to avoid making
@@ -87,24 +87,24 @@ volumes on it. Doing so will require loading the necessary environment
 variables first. These variables are defined in /home/stack/overcloudrc
 by default.
 
-To load these variables, run the following command as the stack user:
+To load these variables, run the following command as the stack user:::
 
-$ source /home/stack/overcloudrc
+  $ source /home/stack/overcloudrc
 
 You should now be logged into the Controller node. From there you can
 create a *volume type*, which can be used to specify the back nd you
 want to use (in this case the newly-defined backend). This is required
 in an OpenStack deployment where you have other backends enabled.
 
-To create a volume type named pure, run:
+To create a volume type named pure, run:::
 
-$ cinder type-create pure
+  $ cinder type-create pure
 
 Next, map this volume type to the backend defined above and given the
 backend name tripleo\_pure (as defined in through the
-**CinderPureBackendName** parameter) by running:
+**CinderPureBackendName** parameter) by running:::
 
-$ cinder type-key pure set volume\_backend\_name=tripleo\_pure
+  $ cinder type-key pure set volume\_backend\_name=tripleo\_pure
 
 You should now be able to create a 2GB volume on your newly defined
 backend by invoking its volume type. To do this run:
