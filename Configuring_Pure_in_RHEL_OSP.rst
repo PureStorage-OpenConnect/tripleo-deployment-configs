@@ -49,7 +49,7 @@ https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs.
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
 
-*pure-temp.yaml* and *cinder-pure-config.yaml* into *~stack/templates/*
+''pure-temp.yaml'' and *cinder-pure-config.yaml* into *~stack/templates/*
 
 *cinder-pure.yaml* into */usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre\_deploy/controller/*
 
@@ -62,7 +62,7 @@ virtual IP address of your FlashArray into the CinderPureSanIp parameter
 and the API Token you had from your FlashArray into the
 CinderPureAPIToken parameter.
 
-Optionally, you can configure your iSCSI FlashArray to use the CHAP
+Optionally, you can configure your FlashArray to use the iSCSI CHAP
 security protocol by changing the default parameter setting of false to
 be true in the parameter CinderPureUseChap.
 
