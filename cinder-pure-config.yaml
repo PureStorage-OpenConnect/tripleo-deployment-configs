@@ -2,6 +2,7 @@
 # a Cinder Pure backend, configured via puppet
 resource_registry:
   OS::TripleO::ControllerExtraConfigPre: /usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/cinder-pure.yaml
+  OS::TripleO::NodeExtraConfig: /home/stack/templates/pure-temp.yaml
 
 parameter_defaults:
   CinderEnablePureBackend: true
@@ -9,4 +10,5 @@ parameter_defaults:
   CinderPureSanIp: ''
   CinderPureAPIToken: ''
   CinderPureUseChap: false
+  CinderPureStorageProtocol: 'iSCSI'  # or 'FC'
   CinderPureMultipathXfer: true

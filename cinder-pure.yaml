@@ -21,6 +21,9 @@ parameters:
   CinderPureUseChap:
     type: boolean
     default: false
+  CinderPureStorageProtocol:
+     type: string
+     default: 'iSCSI'  # or 'FC'
   CinderPureMultipathXfer:
     type: boolean
     default: false
@@ -39,6 +42,7 @@ resources:
                 cinder::backend::pure::volume_backend_name: {get_input: PureBackendName}
                 cinder::backend::pure::san_ip: {get_input: PureSanIp}
                 cinder::backend::pure::pure_api_token: {get_input: PureAPIToken}
+                cinder::backend::pure::pure_storage_protocol: {get_input: PureStorageProtocol}
                 cinder::backend::pure::use_chap_auth: {get_input: PureUseChap}
                 cinder::backend::pure::use_multipath_for_image_xfer: {get_input: PureMultipathXfer}
 
@@ -52,6 +56,7 @@ resources:
         EnablePureBackend: {get_param: CinderEnablePureBackend}
         PureBackendName: {get_param: CinderPureBackendName}
         PureSanIp: {get_param: CinderPureSanIp}
+        PureStorageProtocol: {get_param: CinderPureStorageProtocol}
         PureUseChap: {get_param: CinderPureUseChap}
         PureMultipathXfer: {get_param: CinderPureMultipathXfer}
 
