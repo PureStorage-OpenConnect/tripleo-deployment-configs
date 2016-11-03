@@ -51,13 +51,13 @@ locations in your Undercloud:
 
 ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
-``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre\_deploy/controller/``
+``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
 
 After you have copied these files you need to edit the
 ``~/templates/cinder-pure-config.yaml`` to populate it with your specific
 FlashArray data.
 
-In the ``parameter\_defaults`` section of this file add the management
+In the ``parameter_defaults`` section of this file add the management
 virtual IP address of your FlashArray into the ``CinderPureSanIp`` parameter
 and the API Token you had from your FlashArray into the
 ``CinderPureAPIToken`` parameter.
