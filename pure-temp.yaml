@@ -1,7 +1,7 @@
 heat_template_version: 2015-10-15
 
 description: >
-    Installs the purestorage package on all Controller nodes
+    Installs the purestorage package on all nodes and sets up MPIO and udev rules
 
 parameters:
   server:
@@ -34,7 +34,6 @@ devices {
 }
 EOF
         sudo cp /tmp/multipath.conf /etc/multipath.conf
-        # 
         cat <<EOF >>/tmp/99-pure-storage.rules
 ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/max_sectors_kb}="4096"
 # Use noop scheduler for high-performance solid-state storage
