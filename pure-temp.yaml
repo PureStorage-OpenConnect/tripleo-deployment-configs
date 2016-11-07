@@ -19,9 +19,6 @@ resources:
 defaults {
          polling_interval       5
 }
-blacklist {
-    devnode "vda"
-}
 devices {
         device {
                vendor                   "PURE"
