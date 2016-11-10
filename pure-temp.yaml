@@ -1,6 +1,6 @@
 heat_template_version: 2015-10-15
 
-description: Installs the purestorage package on all nodes and sets up MPIO and udev rules
+description: Sets up MPIO and udev rules on all nodes
 
 parameters:
   server:
@@ -13,7 +13,6 @@ resources:
       group: script
       config: |
         #!/bin/bash
-        sudo easy_install purestorage
         cat <<EOF >>/tmp/multipath.conf
         defaults {
              polling_interval       5
@@ -33,6 +32,7 @@ resources:
         }
         EOF
         sudo cp /tmp/multipath.conf /etc/multipath.conf
+        sudo service multipathd reload 
         cat <<EOF >>/tmp/99-pure-storage.rules
         ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/max_sectors_kb}="4096"
         # Use noop scheduler for high-performance solid-state storage
@@ -45,8 +45,10 @@ resources:
         ACTION=="add", SUBSYSTEMS=="scsi", ATTRS{model}=="FlashArray      ", RUN+="/bin/sh -c 'echo 60 > /sys/$DEVPATH/device/timeout'"
         EOF
         sudo cp /tmp/99-pure-storage.rules /etc/udev/rules.d/99-pure-storage.rules
+        sudo /sbin/udevadm control --reload-rules
+        sudo /sbin/udevadm trigger --type=devices --action=change
 
-    ExtraPreDeployment:
+    ExtraDeployment:
     type: OS::Heat::SoftwareDeployment
     properties:
       config: {get_resource: PureSetup}

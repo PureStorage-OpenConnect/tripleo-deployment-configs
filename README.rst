@@ -49,7 +49,7 @@ https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs.
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
 
-``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+``pure-controller-temp.yaml``, ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
 ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
 
