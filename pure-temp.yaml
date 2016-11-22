@@ -13,26 +13,8 @@ resources:
       group: script
       config: |
         #!/bin/bash
-        cat <<EOF >>/tmp/multipath.conf
-        defaults {
-             polling_interval       5
-        }
-        devices {
-          device {
-               vendor                   "PURE"
-               path_selector            "queue-length 0"
-               path_grouping_policy     multibus
-               path_checker             tur
-               fast_io_fail_tmo         10
-               dev_loss_tmo             60
-               user_friendly_names      no
-               no_path_retry            0
-               features                 0
-               }
-        }
-        EOF
-        sudo cp /tmp/multipath.conf /etc/multipath.conf
-        sudo service multipathd reload 
+        sudo systemctl start multipathd 
+        sudo systemctl enable multipathd 
         cat <<EOF >>/tmp/99-pure-storage.rules
         ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/max_sectors_kb}="4096"
         # Use noop scheduler for high-performance solid-state storage
