@@ -3,7 +3,7 @@ heat_template_version: 2015-10-15
 description: Sets up MPIO and udev rules on all nodes
 
 parameters:
-  server:
+  servers:
     type: string
 
 resources:
@@ -34,5 +34,5 @@ resources:
     type: OS::Heat::SoftwareDeployment
     properties:
       config: {get_resource: PureSetup}
-      server: {get_param: server}
+      servers: {get_param: servers}
       actions: [CREATE,UPDATE]
