@@ -1,0 +1,7 @@
+{
+    "id": "tripleo-deployment-configs",
+    "filter": "openstack",
+    "image": "http://code.purestorage.com/images/image3.png",
+    "featured": 3,
+    "priority": 2
+}
