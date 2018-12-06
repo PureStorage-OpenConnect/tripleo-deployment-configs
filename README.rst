@@ -3,7 +3,7 @@ Introduction
 
 This document covers the configuration process required to enable a
 single Pure Storage array to be used as an iSCSI or Fibre Channel 
-Cinder Block Storage backend in Red Hat OpenStack 8 and 9 distributions.
+Cinder Block Storage backend in Red Hat OpenStack distributions.
 
 The following items are assumed by this document:
 
@@ -45,6 +45,10 @@ integration of the FlashArray into your Overcloud.
 The YAML environment files required can be found on the Pure Storage OpenConnect
 GitHub repository
 https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs.
+Select the correct sub-directory for the deployment version you are using.
+
+RHOSP8 and 9
+============
 
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
@@ -53,8 +57,31 @@ locations in your Undercloud:
 
 ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
 
-After you have copied these files you need to edit the
-``~/templates/cinder-pure-config.yaml`` to populate it with your specific
+RHOSP13
+=======
+
+Copy the YAML files from this subdirectory into the following
+locations in your Undercloud:
+
+``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+
+Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
+container::
+
+  $ docker build . -t "openstack-cinder-volume-pure:latest"
+
+This newly created image can then be pushed to a registry that has been configured
+as the sources of images to be used by the RHOSP deployment.
+
+Edit the overcloud container images environment file (usually
+``overcloud_images.yaml``, created when using the
+``openstack overcloud container image prepare`` command) and change the
+appropriate parameter to use the custom container image.
+
+All versions
+============
+
+Edit ``~/templates/cinder-pure-config.yaml`` and populate it with your specific
 FlashArray data.
 
 In the ``parameter_defaults`` section of this file add the management
@@ -71,9 +98,10 @@ Deploying the Configured Backend
 
 To deploy the single backend configured above, first, log in as the
 stack user to the Undercloud. Then deploy the backend (defined in the
-edited ``~/templates/cinder-pure-config.yaml``) by running the following::
-
-  $ openstack overcloud deploy –templates –e ~/templates/cinder-pure-config.yaml
+edited ``~/templates/cinder-pure-config.yaml``) by running the
+``openstack overcloud deploy`` with the required switches for your
+deployment version together with an additonal templates file defined
+by ``–e ~/templates/cinder-pure-config.yaml``
 
 If you passed any extra environment files when you created the Overcloud
 you must pass them again here using the –e option to avoid making
