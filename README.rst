@@ -60,6 +60,14 @@ locations in your Undercloud:
 RHOSP13
 =======
 
+.. note::
+  There is a bug in the current release of the TripleO Heat Templates used
+  in RHOSP13. A patch has been created and is awaiting merge. Whilst this
+  bug is present please refer to the patch to get the corrected code. The
+  patch can be found here_
+
+.. _here: https://review.openstack.org/#/c/619608
+
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
 
