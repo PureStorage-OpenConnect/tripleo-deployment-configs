@@ -1,6 +1,6 @@
-FROM registry.access.redhat.com/rhosp13/openstack-cinder-volume
+FROM registry.access.redhat.com/rhosp14/openstack-cinder-volume
 MAINTAINER Pure Storage, Inc.
-LABEL name="rhosp13/openstack-cinder-volume-pure" vendor="Pure Storage" version="1.0" release="13" description="Red Hat OpenStack Platform 13.0 cinder-volume Pure Storage FlashArray"
+LABEL name="rhosp14/openstack-cinder-volume-pure" vendor="Pure Storage" version="1.0" release="14" description="Red Hat OpenStack Platform 14.0 cinder-volume Pure Storage FlashArray"
 USER root
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install python-pip -y

@@ -57,14 +57,14 @@ locations in your Undercloud:
 
 ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
 
-RHOSP13
-=======
+RHOSP13 and 14
+==============
 
 .. note::
-  There is a bug in the current release of the TripleO Heat Templates used
-  in RHOSP13. A patch has been created and is awaiting merge. Whilst this
-  bug is present please refer to the patch to get the corrected code. The
-  patch can be found here_
+  There is a bug in the Queens and Rocky releases of the TripleO Heat Templates used
+  in RHOSP13 and RHOSP14. This issue is fixed in the Stein release (RHOSP15).
+  Please reference the patch found here_ to manually implement the required
+  fixes.
 
 .. _here: https://review.openstack.org/#/c/619608
 
