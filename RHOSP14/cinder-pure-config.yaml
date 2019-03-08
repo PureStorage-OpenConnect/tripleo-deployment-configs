@@ -5,6 +5,7 @@ resource_registry:
   OS::TripleO::NodeExtraConfigPost: /home/stack/templates/pure/pure-temp.yaml
 
 parameter_defaults:
+  CinderEnableIscsiBackend: false
   CinderEnablePureBackend: true
   CinderPureBackendName: 'tripleo_pure'
   CinderPureStorageProtocol: 'iSCSI'  # or 'FC'
