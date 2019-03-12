@@ -5,6 +5,7 @@ USER root
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install python-pip -y
 RUN /usr/bin/pip install purestorage
+RUN mpathconf --enable
 # Add required license as text file in Liceses directory (GPL, MIT, APACHE, Partner End User Agreement, etc)
 COPY licenses /licenses
 # switch the container back to the default user
