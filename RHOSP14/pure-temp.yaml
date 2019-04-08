@@ -13,6 +13,7 @@ resources:
         group: script
         config: |
           #!/bin/bash
+          sudo mpathconf --enable
           sudo systemctl start multipathd 
           sudo systemctl enable multipathd 
           cat <<EOF >>/tmp/99-pure-storage.rules
