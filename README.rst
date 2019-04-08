@@ -81,6 +81,9 @@ container::
 This newly created image can then be pushed to a registry that has been configured
 as the sources of images to be used by the RHOSP deployment.
 
+Red Hat Certified versions of these containers can also be used. These can be found
+in the Red Hat Container Catalog. See https://access.redhat.com/containers/#/search/pure
+
 Edit the overcloud container images environment file (usually
 ``overcloud_images.yaml``, created when using the
 ``openstack overcloud container image prepare`` command) and change the
