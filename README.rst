@@ -89,6 +89,30 @@ Edit the overcloud container images environment file (usually
 ``openstack overcloud container image prepare`` command) and change the
 appropriate parameter to use the custom container image.
 
+RHOSP15 (not yet released)
+==========================
+
+Copy the YAML files from this subdirectory into the following
+locations in your Undercloud:
+
+``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+
+Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
+container::
+
+  $ docker build . -t "openstack-cinder-volume-pure:latest"
+
+This newly created image can then be pushed to a registry that has been configured
+as the sources of images to be used by the RHOSP deployment.
+
+Red Hat Certified versions of these containers can also be used. These can be found
+in the Red Hat Container Catalog. See https://access.redhat.com/containers/#/search/pure
+
+Edit the overcloud container images environment file (usually
+``overcloud_images.yaml``, created when using the
+``openstack overcloud container image prepare`` command) and change the
+appropriate parameter to use the custom container image.
+
 All versions
 ============
 
