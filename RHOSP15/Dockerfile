@@ -1,7 +1,8 @@
-FROM registry.access.redhat.com/rhosp15/openstack-cinder-volume
+FROM registry.redhat.io/rhosp-beta/openstack-cinder-volume
 MAINTAINER Pure Storage, Inc.
-LABEL name="rhosp14/openstack-cinder-volume-pure" vendor="Pure Storage" version="1.0" release="15" summary="Red Hat OpenStack Platform 15.0 cinder-volume Pure Storage FlashArray" description="Cinder plugin for Pure Storage FlashArray"
+LABEL name="rhosp15/openstack-cinder-volume-pure" vendor="Pure Storage" version="1.0" release="15" summary="Red Hat OpenStack Platform 15.0 cinder-volume Pure Storage FlashArray" description="Cinder plugin for Pure Storage FlashArray"
 USER root
+RUN subscription-manager register --org=6375131 --activationkey=OpenStack_DCI
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install python-pip -y
 RUN /usr/bin/pip install purestorage
