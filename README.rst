@@ -60,14 +60,6 @@ locations in your Undercloud:
 RHOSP13 and 14
 ==============
 
-.. note::
-  There is a bug in the Queens and Rocky releases of the TripleO Heat Templates used
-  in RHOSP13 and RHOSP14. This issue is fixed in the Stein release (RHOSP15).
-  Please reference the patch found here_ to manually implement the required
-  fixes.
-
-.. _here: https://review.openstack.org/#/c/619608
-
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
 
