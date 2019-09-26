@@ -81,8 +81,8 @@ Edit the overcloud container images environment file (usually
 ``openstack overcloud container image prepare`` command) and change the
 appropriate parameter to use the custom container image.
 
-RHOSP15 (not yet released)
-==========================
+RHOSP15
+=======
 
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
