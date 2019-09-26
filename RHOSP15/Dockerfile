@@ -1,4 +1,4 @@
-FROM registry.redhat.io/rhosp-beta/openstack-cinder-volume
+FROM registry.redhat.io/rhosp15-rhel8/openstack-cinder-base
 MAINTAINER Pure Storage, Inc.
 LABEL name="rhosp15/openstack-cinder-volume-pure" vendor="Pure Storage" version="1.0" release="15" summary="Red Hat OpenStack Platform 15.0 cinder-volume Pure Storage FlashArray" description="Cinder plugin for Pure Storage FlashArray"
 USER root
