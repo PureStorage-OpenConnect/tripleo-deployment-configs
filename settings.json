@@ -3,6 +3,6 @@
     "name": "OpenStack on OpenStack Integration",
     "filter": "virtualization",
     "image": "http://code.purestorage.com/images/21_TripleO.png",
-    "featured": 3,
+    "featured": 0,
     "priority": 2
 }
