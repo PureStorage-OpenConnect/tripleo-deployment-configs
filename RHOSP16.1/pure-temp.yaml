@@ -1,0 +1,40 @@
+heat_template_version: queens
+
+description: Sets up MPIO and udev rules on all nodes
+
+parameters:
+  servers:
+    type: json
+
+resources:
+    PureSetup:
+      type: OS::Heat::SoftwareConfig
+      properties:
+        group: script
+        config: |
+          #!/bin/bash
+          sudo mpathconf --enable
+          sudo systemctl start multipathd 
+          sudo systemctl enable multipathd 
+          cat <<EOF >>/tmp/99-pure-storage.rules
+          ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/max_sectors_kb}="4096"
+          # Use noop scheduler for high-performance solid-state storage
+          ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/scheduler}="noop"
+          # Reduce CPU overhead due to entropy collection
+          ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/add_random}="0"
+          # Spread CPU load by redirecting completions to originating CPU
+          ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/rq_affinity}="2"
+          # Set the HBA timeout to 60 seconds
+          ACTION=="add", SUBSYSTEMS=="scsi", ATTRS{model}=="FlashArray      ", RUN+="/bin/sh -c 'echo 60 > /sys/\$DEVPATH/device/timeout'"
+          EOF
+          sudo cp /tmp/99-pure-storage.rules /etc/udev/rules.d/99-pure-storage.rules
+          sudo /sbin/udevadm control --reload-rules
+          sudo /sbin/udevadm trigger --type=devices --action=change
+
+    ExtraDeployment:
+      type: OS::Heat::SoftwareDeploymentGroup
+
+      properties:
+        servers: {get_param: servers}
+        config: {get_resource: PureSetup}
+        actions: [CREATE]
