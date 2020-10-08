@@ -164,4 +164,4 @@ backend name tripleo_pure (as defined in through the
 You should now be able to create a 2GB volume on your newly defined
 backend by invoking its volume type. To do this run::
 
-  $ cinder create –volume-type pure 2
+  $ cinder create --volume-type pure 2
