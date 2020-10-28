@@ -30,7 +30,7 @@ resources:
                 max_sectors_kb 4096
               }
           }
-          sudo cat /tmp/multipath.conf >>/etc/multipath/multipath.conf
+          sudo cat /tmp/multipath.conf >>/etc/multipath.conf
           sudo systemctl start multipathd 
           sudo systemctl enable multipathd 
           cat <<EOF >>/tmp/99-pure-storage.rules
