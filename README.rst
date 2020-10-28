@@ -74,15 +74,15 @@ This newly created image can then be pushed to a registry that has been configur
 as the sources of images to be used by the RHOSP deployment.
 
 Red Hat Certified versions of these containers can also be used. These can be found
-in the Red Hat Container Catalog. See https://access.redhat.com/containers/#/search/pure
+in the Red Hat Container Catalog. See https://catalog.redhat.com/software/containers/search?q=pure&p=1
 
 Edit the overcloud container images environment file (usually
 ``overcloud_images.yaml``, created when using the
 ``openstack overcloud container image prepare`` command) and change the
 appropriate parameter to use the custom container image.
 
-RHOSP15 and 16
-==============
+RHOSP15
+=======
 
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
@@ -98,15 +98,41 @@ This newly created image can then be pushed to a registry that has been configur
 as the sources of images to be used by the RHOSP deployment.
 
 Red Hat Certified versions of these containers can also be used. These can be found
-in the Red Hat Container Catalog. See https://access.redhat.com/containers/#/search/pure
+in the Red Hat Container Catalog. See https://catalog.redhat.com/software/containers/search?q=pure&p=1
 
 Edit the overcloud container images environment file (usually
 ``overcloud_images.yaml``, created when using the
 ``openstack overcloud container image prepare`` command) and change the
 appropriate parameter to use the custom container image.
 
-All versions
-============
+RHOSP16 (RHEL8)
+===============
+
+Copy the YAML files from this subdirectory into the following
+locations in your Undercloud:
+
+``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+
+Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
+container::
+
+  $ sudo buildah bud . -t "openstack-cinder-volume-pure:latest"
+
+This newly created image can then be pushed to a local registry that has been configured
+as the sources of images to be used by the RHOSP deployment::
+
+  $ sudo openstack tripleo container image push --local <registry:port>/<directory>/openstack-cinder-volume-pure:latest
+
+Red Hat Certified versions of these containers can also be used. These can be found
+in the Red Hat Container Catalog. See https://catalog.redhat.com/software/containers/search?q=pure&p=1
+
+Edit the overcloud container images environment file (usually
+``overcloud_images.yaml``, created when using the
+``openstack overcloud container image prepare`` command) and change the
+appropriate parameter to use the custom container image.
+
+All versions - Configure the Environment File
+=============================================
 
 Edit ``~/templates/cinder-pure-config.yaml`` and populate it with your specific
 FlashArray data.
@@ -120,6 +146,38 @@ Optionally, you can configure your FlashArray to use the iSCSI CHAP
 security protocol by changing the default parameter setting of false to
 be true in the parameter ``CinderPureUseChap``.
 
+Multiple Backends
+#################
+
+If you wish to create multiple Pure backends then use ``CinderPureMultiConfig``
+when modifying the ``~/templates/cinder-pure-config.yaml`` as follows:::
+
+   parameter_defaults:
+     CinderPureBackendName:
+       - tripleo_pure_1
+       - tripleo_pure_2
+     CinderPureStorageProtocol: 'iSCSI' # Default value for all Pure backends
+     CinderPureUseChap: false # Default value for the Pure backends
+     CinderPureMultiConfig:
+       tripleo_pure_1:
+         CinderPureSanIp: '10.0.0.1'
+         CinderPureAPIToken: 'secret'
+       tripleo_pure_2:
+         CinderPureSanIp: '10.0.0.2'
+         CinderPureAPIToken: 'anothersecret'
+         CinderPureUseChap: true # Specific value for this backend
+
+
+Requirements
+============
+
+To deploy the Pure Storage FlashArray Cinder driver you must meet the following
+requirements:
+
+- Pure Storage FlashArrays deployed and ready to be used as Cinderbackends
+- RHOSP Director user credentials to deploy the Overcloud
+- RHOSP Overcloud Controller nodes where the Cinder services will be installed  
+
 Deploying the Configured Backend
 ================================
 
@@ -128,10 +186,12 @@ stack user to the Undercloud. Then deploy the backend (defined in the
 edited ``~/templates/cinder-pure-config.yaml``) by running the
 ``openstack overcloud deploy`` with the required switches for your
 deployment version together with an additonal templates file defined
-by ``–e ~/templates/cinder-pure-config.yaml``
+by ``–e ~/templates/cinder-pure-config.yaml``::
+
+  $ openstack overcloud deploy --templates -e ~/templates/cinder-pure-config.yaml
 
 If you passed any extra environment files when you created the Overcloud
-you must pass them again here using the –e option to avoid making
+you must pass them again here using the ``–e`` option to avoid making
 undesired changes to the Overcloud.
 
 Test the Configured Backend
@@ -156,7 +216,7 @@ To create a volume type named pure, run::
   $ cinder type-create pure
 
 Next, map this volume type to the backend defined above and given the
-backend name tripleo_pure (as defined in through the
+backend name ``tripleo_pure`` (as defined in through the
 **CinderPureBackendName** parameter) by running::
 
   $ cinder type-key pure set volume_backend_name=tripleo_pure
