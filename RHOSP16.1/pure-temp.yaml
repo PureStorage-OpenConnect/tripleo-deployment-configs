@@ -23,6 +23,7 @@ resources:
           cat <<EOF >>/tmp/multipath.conf
           defaults {
             polling_interval      10
+            skip_kpartx yes
           }
           devices {
             device {
