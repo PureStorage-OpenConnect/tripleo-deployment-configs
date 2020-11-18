@@ -15,3 +15,7 @@ parameter_defaults:
   CinderPureMultipathXfer: true
   CinderPureImageCache: true
   CinderPureMultiConfig: {}
+  NovaLibvirtVolumeUseMultipath:  true
+  NovaComputeOptVolumes:
+    - /etc/multipath.conf:/etc/multipath.conf:ro
+    - /etc/multipath/:/etc/multipath/:rw
