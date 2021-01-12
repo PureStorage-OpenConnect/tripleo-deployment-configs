@@ -3,7 +3,7 @@ Introduction
 
 This document covers the configuration process required to enable a
 single Pure Storage array to be used as an iSCSI or Fibre Channel 
-Cinder Block Storage backend in Red Hat OpenStack distributions.
+Cinder Block Storage backend in Red Hat OpenStack Platform distributions.
 
 The following items are assumed by this document:
 
@@ -15,13 +15,16 @@ The following items are assumed by this document:
    network or routed to the cloud management network with the Pure
    Storage iSCSI ports correctly configured, if using this protocol.
 
--  The Pure Storage management IP (and iSCSI port IPs if applicable) must have
-   connectivity from the controller and compute nodes.
+-  The Pure Storage management IP must have connectivity from the Cinder
+   Volume Service controller.
+
+-  The Pure Storage iSCSI ports (if applicable) must have connectivity
+   from the Cinder Volume Service controller and all compute nodes.
 
 -  You have obtained a privileged API token from the Pure Storage
-   FlashArray that will be used by OpenStack Block Storage service.
+   FlashArray that will be used by OpenStack Cinder Volume service.
 
-When RHEL OpenSstack Platform is deployed through the Director, all
+When RHEL OpenStack Platform is deployed through the Director, all
 major Overcloud settings must be defined and orchestrated through the
 Director as well. This will ensure that the settings persist through any
 Overcloud updates.
@@ -29,10 +32,6 @@ Overcloud updates.
 This document will not discuss the different deployment configurations
 possible with the backend. To learn more about these see the OpenStack
 Best Practises documents provided by Pure Storage.
-
-At present, the Director only has the integrated components to deploy a
-single instance of a Pure Storage backend. Therefore this document only
-describes the deployment of a single backend.
 
 Configure Pure Storage as a Cinder backend
 ==========================================
