@@ -46,8 +46,8 @@ GitHub repository
 https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs.
 Select the correct sub-directory for the deployment version you are using.
 
-RHOSP8 and 9
-============
+RHOSP8, 9 and 10
+================
 
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
