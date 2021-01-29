@@ -1,0 +1,23 @@
+heat_template_version: 2015-10-15
+
+description: Installs the purestorage package on all controller nodes
+
+parameters:
+  server:
+    type: string
+
+resources:
+    PureControllerSetup:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      config: |
+        #!/bin/bash
+        sudo easy_install purestorage
+
+    ExtraControllerDeployment:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      config: {get_resource: PureControllerSetup}
+      server: {get_param: server}
+      actions: [CREATE,UPDATE]
