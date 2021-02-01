@@ -49,7 +49,7 @@ Select the correct sub-directory for the deployment version you are using.
 RHOSP 8 and 9
 =============
 
-**NOTE: Red Hat OpenStack Platform 13 and 14 are no longer supported by Red Hat or Pure Storage.**
+**NOTE: Red Hat OpenStack Platform 8 and 9 are no longer supported by Red Hat or Pure Storage.**
 
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
