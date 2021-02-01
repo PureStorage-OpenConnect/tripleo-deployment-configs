@@ -54,9 +54,9 @@ RHOSP 8 and 9
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
 
- - ``pure-controller-temp.yaml``, ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+- ``pure-controller-temp.yaml``, ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
- - ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
+- ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
 
 RHOSP 10
 ========
@@ -70,9 +70,9 @@ RHOSP 10
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
 
- - ``pure-controller-temp.yaml``, ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+- ``pure-controller-temp.yaml``, ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
- - ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
+- ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
 
 RHOSP 13
 ========
@@ -82,7 +82,7 @@ RHOSP 13
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
 
- - ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+- ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
 Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
 container::
@@ -108,7 +108,7 @@ RHOSP 14 and 15
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
 
- - ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+- ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
 Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
 container::
@@ -138,7 +138,7 @@ RHOSP 16 (RHEL8)
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
 
- - ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+- ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
 
 Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
 container::
