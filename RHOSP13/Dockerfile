@@ -4,6 +4,7 @@ LABEL name="rhosp13/openstack-cinder-volume-pure" vendor="Pure Storage" version=
 USER root
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install python-pip -y
+RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical
 RUN /usr/bin/pip install purestorage
 # Create a default multipath.conf file
 RUN mpathconf --enable
