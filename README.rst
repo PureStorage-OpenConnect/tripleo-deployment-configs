@@ -46,8 +46,10 @@ GitHub repository
 https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs.
 Select the correct sub-directory for the deployment version you are using.
 
-RHOSP8, 9 and 10
-================
+RHOSP 8 and 9
+=============
+
+**NOTE: Red Hat OpenStack Platform 13 and 14 are no longer supported by Red Hat or Pure Storage.**
 
 Obtain the YAML files from this repository and copy into the following
 locations in your Undercloud:
@@ -56,8 +58,26 @@ locations in your Undercloud:
 
 ``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
 
-RHOSP13 and 14
-==============
+RHOSP 10
+========
+
+**NOTE: Red Hat OpenStack Platform 10 is still supported by Red Hat and Pure Storage.**
+
+**Red Hat Openstack 10 is only supported with Red Hat Enterprise Linux 7.7**
+
+**Red Hat and Pure Storage will not support Red Hat Openstack 10 after December 15, 2021.**
+
+Obtain the YAML files from this repository and copy into the following
+locations in your Undercloud:
+
+``pure-controller-temp.yaml``, ``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+
+``cinder-pure.yaml`` into ``/usr/share/openstack-tripleo-heat-templates/puppet/extraconfig/pre_deploy/controller/``
+
+RHOSP 13
+========
+
+**NOTE: Red Hat OpenStack Platform 13 will not be supported by Red Hat or Pure Storage after June 27,2023.**
 
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
@@ -67,7 +87,7 @@ locations in your Undercloud:
 Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
 container::
 
-  $ docker build . -t "openstack-cinder-volume-pure:latest"
+  $ docker build .
 
 This newly created image can then be pushed to a registry that has been configured
 as the sources of images to be used by the RHOSP deployment.
@@ -80,33 +100,11 @@ Edit the overcloud container images environment file (usually
 ``openstack overcloud container image prepare`` command) and change the
 appropriate parameter to use the custom container image.
 
-RHOSP15
-=======
-
-Copy the YAML files from this subdirectory into the following
-locations in your Undercloud:
-
-``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
-
-Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
-container::
-
-  $ docker build . -t "openstack-cinder-volume-pure:latest"
-
-This newly created image can then be pushed to a registry that has been configured
-as the sources of images to be used by the RHOSP deployment.
-
-Red Hat Certified versions of these containers can also be used. These can be found
-in the Red Hat Container Catalog. See https://catalog.redhat.com/software/containers/search?q=pure&p=1
-
-Edit the overcloud container images environment file (usually
-``overcloud_images.yaml``, created when using the
-``openstack overcloud container image prepare`` command) and change the
-appropriate parameter to use the custom container image.
-
-RHOSP16 (RHEL8)
+RHOSP 14 and 15
 ===============
 
+**NOTE: Red Hat OpenStack Platform 14 and 15 are no longer supported by Red Hat or Pure Storage.**
+
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
 
@@ -115,7 +113,37 @@ locations in your Undercloud:
 Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
 container::
 
-  $ sudo buildah bud . -t "openstack-cinder-volume-pure:latest"
+  $ docker build .
+
+This newly created image can then be pushed to a registry that has been configured
+as the sources of images to be used by the RHOSP deployment.
+
+Red Hat Certified versions of these containers can also be used. These can be found
+in the Red Hat Container Catalog. See https://catalog.redhat.com/software/containers/search?q=pure&p=1
+
+Edit the overcloud container images environment file (usually
+``overcloud_images.yaml``, created when using the
+``openstack overcloud container image prepare`` command) and change the
+appropriate parameter to use the custom container image.
+
+RHOSP 16 (RHEL8)
+================
+
+**NOTE:**
+
+**Red Hat Openstack 16.0 is no longer supported by Red Hat and Pure Storage.**
+
+**Red Hat OpenStack 16.1 is only supported with Red Hat Enterprise Linux 8.2. Red Hat and Pure Storage will not support Red Hat Openstack 16.1 with Red Hat Enterprise Linux 8.2 after April 30, 2024**
+
+Copy the YAML files from this subdirectory into the following
+locations in your Undercloud:
+
+``pure-temp.yaml`` and ``cinder-pure-config.yaml`` into ``~stack/templates/``
+
+Use the ``Dockerfile`` to create a Pure Storage specific Cinder Volume
+container::
+
+  $ sudo buildah bud .
 
 This newly created image can then be pushed to a local registry that has been configured
 as the sources of images to be used by the RHOSP deployment::
