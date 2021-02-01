@@ -4,7 +4,7 @@ LABEL name="rhosp16/openstack-cinder-volume-pure" vendor="Pure Storage" version=
 USER root
 RUN yum install -y python3-requests
 RUN yum install -y https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs/raw/master/RHOSP16/python3-purestorage-1.18.1-1.el8.noarch.rpm
-RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical
+RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --allowerasing
 RUN mpathconf --enable
 # Add required license as text file in Liceses directory (GPL, MIT, APACHE, Partner End User Agreement, etc)
 COPY licenses /licenses
