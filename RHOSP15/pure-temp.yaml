@@ -14,7 +14,8 @@ resources:
         config: |
           #!/bin/bash
           sudo mpathconf --enable
-          sudo systemctl start multipathd 
+          sudo sed -i "s/^defaults {/defaults {\n\tskip_kpartx yes/" /etc/multipath.conf
+          sudo systemctl start multipathd
           sudo systemctl enable multipathd 
           cat <<EOF >>/tmp/99-pure-storage.rules
           ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{queue/max_sectors_kb}="4096"
@@ -37,4 +38,4 @@ resources:
       properties:
         servers: {get_param: servers}
         config: {get_resource: PureSetup}
-        actions: [CREATE]
+        actions: [CREATE,UPDATE]
