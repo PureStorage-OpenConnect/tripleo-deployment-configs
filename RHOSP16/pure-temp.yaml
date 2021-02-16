@@ -57,4 +57,4 @@ resources:
       properties:
         servers: {get_param: servers}
         config: {get_resource: PureSetup}
-        actions: [CREATE]
+        actions: [CREATE,UPDATE]
