@@ -13,6 +13,7 @@ resources:
         group: script
         config: |
           #!/bin/bash
+          sudo yum install -y https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs/raw/master/RHOSP10/python2-purestorage-1.16.0-1.el7.noarch.rpm
           sudo systemctl start multipathd 
           sudo systemctl enable multipathd 
           cat <<EOF >>/tmp/99-pure-storage.rules
