@@ -135,6 +135,8 @@ RHOSP 16 (RHEL8)
 
 **Red Hat OpenStack 16.1 is only supported with Red Hat Enterprise Linux 8.2. Red Hat and Pure Storage will not support Red Hat Openstack 16.1 with Red Hat Enterprise Linux 8.2 after April 30, 2024**
 
+**Red Hat OpenStack 16.2 is only supported with Red Hat Enterprise Linux 8.4.**
+
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
 
