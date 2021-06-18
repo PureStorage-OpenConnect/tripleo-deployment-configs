@@ -19,3 +19,6 @@ parameter_defaults:
   NovaComputeOptVolumes:
     - /etc/multipath.conf:/etc/multipath.conf:ro
     - /etc/multipath/:/etc/multipath/:rw
+  CinderVolumeOptVolumes:
+    - /etc/multipath.conf:/etc/multipath.conf:ro
+    - /etc/multipath/:/etc/multipath/:rw
