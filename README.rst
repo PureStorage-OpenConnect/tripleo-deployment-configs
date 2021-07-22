@@ -77,7 +77,7 @@ locations in your Undercloud:
 RHOSP 13
 ========
 
-**NOTE: Red Hat OpenStack Platform 13 will not be supported by Red Hat or Pure Storage after June 27,2023.**
+**NOTE: Red Hat OpenStack Platform 13 went End of Life on June 27, 2021 and entered Extended Support at this date. RHOSP 13 will not be supported by Red Hat or Pure Storage after June 27, 2023.**
 
 Copy the YAML files from this subdirectory into the following
 locations in your Undercloud:
