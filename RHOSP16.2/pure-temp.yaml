@@ -5,6 +5,11 @@ description: Sets up MPIO and udev rules on all nodes
 parameters:
   servers:
     type: json
+EndpointMap:
+    default: {}
+    type: json
+    description: Mapping of service endpoint -> protocol. Typically set
+                 via parameter_defaults in the resource registry.
 
 resources:
     PureSetup:
