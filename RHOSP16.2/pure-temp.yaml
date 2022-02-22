@@ -19,13 +19,16 @@ resources:
         config: |
           #!/bin/bash
           sudo yum install -y libstoragemgmt-udev
-          cat <<EOF >>/tmp/90-scsi-ua.rules
+          cat <<EOF >/tmp/90-scsi-ua.rules
           # Add SCSI Unit Attention rescan for resize
           ACTION=="change", SUBSYSTEM=="scsi", ENV{SDEV_UA}=="CAPACITY_DATA_HAS_CHANGED", TEST=="rescan", ATTR{rescan}="x"
           EOF
-          cat /tmp/90-scsi-ua.rules >>/etc/udev/rules.d/90-scsi-ua.rules
+          sudo grep -q "CAPACITY_DATA_HAS_CHANGED" /etc/udev/rules.d/90-scsi-ua.rules
+          if [[ $? != 0 ]]; then
+            cat /tmp/90-scsi-ua.rules >>/etc/udev/rules.d/90-scsi-ua.rules
+          fi
           sudo mpathconf --enable --with_multipathd yes
-          cat <<EOF >>/tmp/multipath.conf
+          cat <<EOF >/tmp/multipath.conf
           defaults {
             polling_interval      10
             skip_kpartx yes
@@ -43,9 +46,12 @@ resources:
               }
           }
           EOF
-          sudo cat /tmp/multipath.conf >>/etc/multipath.conf
-          sudo systemctl start multipathd 
-          sudo systemctl enable multipathd
+          sudo grep -q "PURE" /etc/multipath.conf
+          if  [[ $? != 0 ]]; then
+            sudo cat /tmp/multipath.conf >>/etc/multipath.conf
+            sudo systemctl start multipathd 
+            sudo systemctl enable multipathd
+          fi
           cat <<EOF >>/tmp/99-pure-storage.rules
           # Recommended settings for Pure Storage FlashArray.
           # Use noop scheduler for high-performance solid-state storage for SCSI devices
@@ -63,7 +69,7 @@ resources:
           # Set the HBA timeout to 60 seconds
           ACTION=="add|change", KERNEL=="sd*[!0-9]", SUBSYSTEM=="block", ENV{ID_VENDOR}=="PURE", ATTR{device/timeout}="60"
           EOF
-          sudo cp /tmp/99-pure-storage.rules /etc/udev/rules.d/99-pure-storage.rules
+          sudo mv /tmp/99-pure-storage.rules /etc/udev/rules.d/99-pure-storage.rules
           sudo /sbin/udevadm control --reload-rules
           sudo /sbin/udevadm trigger --type=devices --action=change
 
