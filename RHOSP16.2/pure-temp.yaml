@@ -5,7 +5,7 @@ description: Sets up MPIO and udev rules on all nodes
 parameters:
   servers:
     type: json
-EndpointMap:
+  EndpointMap:
     default: {}
     type: json
     description: Mapping of service endpoint -> protocol. Typically set
