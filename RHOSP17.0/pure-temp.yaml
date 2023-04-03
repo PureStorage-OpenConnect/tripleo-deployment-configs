@@ -28,7 +28,7 @@ resources:
             cat /tmp/90-scsi-ua.rules >>/etc/udev/rules.d/90-scsi-ua.rules
           fi
           sudo mpathconf --enable --with_multipathd yes
-          cat <<EOF >>/tmp/multipath.conf
+          cat <<EOF >/tmp/multipath.conf
           defaults {
             polling_interval      10
             skip_kpartx yes
