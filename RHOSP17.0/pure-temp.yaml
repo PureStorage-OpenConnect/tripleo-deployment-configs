@@ -31,7 +31,9 @@ resources:
           cat <<EOF >/tmp/multipath.conf
           defaults {
             polling_interval      10
-            skip_kpartx yes
+            skip_kpartx           yes
+            user_friendly_names   no
+            find_myltipaths       yes
           }
           devices {
             device {
@@ -44,7 +46,6 @@ resources:
                 failback                 immediate
                 path_checker             tur
                 fast_io_fail_tmo         10
-                user_friendly_names      no
                 no_path_retry            0
                 features                 0
                 dev_loss_tmo             600
