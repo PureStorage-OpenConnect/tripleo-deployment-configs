@@ -33,7 +33,7 @@ resources:
             polling_interval      10
             skip_kpartx           yes
             user_friendly_names   no
-            find_myltipaths       yes
+            find_multipaths       yes
           }
           devices {
             device {
