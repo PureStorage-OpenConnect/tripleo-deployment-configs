@@ -1,4 +1,4 @@
-FROM registry.redhat.io/rhosp-rhel9/openstack-manila-share:17.1
+FROM registry.redhat.io/rhosp-beta/openstack-manila-share:17.1
 
 MAINTAINER Pure Storage, Inc.
 
@@ -10,8 +10,6 @@ LABEL name="rhosp17/openstack-manila-share-flashblade" \
       description="Manila plugin for Pure Storage FlashBlade"
 
 USER root
-
-#RUN pip3 install purity_fb
 
 RUN yum install -y https://github.com/PureStorage-OpenConnect/tripleo-deployment-configs/raw/master/manila/RHOSP17.1/python3-purity_fb-1.12.3-1.el9.noarch.rpm
 
