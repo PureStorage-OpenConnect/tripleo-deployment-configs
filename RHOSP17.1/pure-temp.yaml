@@ -27,7 +27,7 @@ resources:
           if [[ $? != 0 ]]; then
             cat /tmp/90-scsi-ua.rules >>/etc/udev/rules.d/90-scsi-ua.rules
           fi
-          sudo mpathconf --enable --with_multipathd yes
+          sudo mpathconf --enable --with_multipathd y
           cat <<EOF >/tmp/multipath.conf
           defaults {
             polling_interval      10
