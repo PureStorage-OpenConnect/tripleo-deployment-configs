@@ -13,7 +13,7 @@ resources:
         group: script
         config: |
           #!/bin/bash
-          sudo mpathconf --enable --with_multipathd yes
+          sudo mpathconf --enable --with_multipathd y
           cat <<EOF >>/tmp/multipath.conf
           defaults {
             polling_interval      10
