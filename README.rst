@@ -1,4 +1,4 @@
-**NOTE: All RHOSO18 Documentation is located `here <https://pure-storage-openstack-docs.readthedocs.io/en/latest/cinder/configuration/cinder_config_files/section_rhoso180_flasharray_configuration.html>`_.**
+**NOTE: All RHOSO18 Documentation is located** `here <https://pure-storage-openstack-docs.readthedocs.io/en/latest/cinder/configuration/cinder_config_files/section_rhoso180_flasharray_configuration.html>`_.
 
 Introduction
 ============
@@ -282,4 +282,5 @@ You should now be able to create a 2GB volume on your newly defined
 backend by invoking its volume type. To do this run::
 
   $ cinder create --volume-type pure 2
+
 
